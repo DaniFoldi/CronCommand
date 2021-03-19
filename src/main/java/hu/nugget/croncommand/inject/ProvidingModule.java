@@ -1,8 +1,8 @@
-package hu.nugget.cromcommand.inject;
+package hu.nugget.croncommand.inject;
 
 import dagger.Module;
 import dagger.Provides;
-import hu.nugget.cromcommand.config.Configuration;
+import hu.nugget.croncommand.config.Configuration;
 
 import javax.inject.Singleton;
 

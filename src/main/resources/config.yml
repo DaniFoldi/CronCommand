@@ -1,0 +1,8 @@
+schedule:
+  "30 * * * *":
+    - lottery broadcast
+  "* * * * *":
+    - say test
+    - give @a diamond
+
+lastrun:

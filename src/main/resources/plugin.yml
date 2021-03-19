@@ -1,0 +1,9 @@
+name: CronCommand
+version: ${version}
+main: hu.nugget.croncommand
+authors:
+  - DaniFoldi
+  - HgeX
+website: nugget.hu
+description: Run commands at specified cron times
+api-version: 1.13

@@ -1,8 +1,8 @@
-package hu.nugget.cromcommand.util;
+package hu.nugget.croncommand.util;
 
 import com.electronwill.nightconfig.core.Config;
 import com.electronwill.nightconfig.core.file.FileConfig;
-import hu.nugget.cromcommand.CronCommand;
+import hu.nugget.croncommand.CronCommand;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

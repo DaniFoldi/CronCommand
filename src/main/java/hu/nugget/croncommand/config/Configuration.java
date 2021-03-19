@@ -1,4 +1,4 @@
-package hu.nugget.cromcommand.config;
+package hu.nugget.croncommand.config;
 
 public class Configuration implements ObjectMappable {
 }

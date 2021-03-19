@@ -1,7 +1,7 @@
-package hu.nugget.cromcommand;
+package hu.nugget.croncommand;
 
-import hu.nugget.cromcommand.inject.DaggerPluginComponent;
-import hu.nugget.cromcommand.inject.PluginComponent;
+import hu.nugget.croncommand.inject.DaggerPluginComponent;
+import hu.nugget.croncommand.inject.PluginComponent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CronCommand extends JavaPlugin {

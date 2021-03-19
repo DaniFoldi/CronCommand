@@ -1,9 +1,9 @@
-package hu.nugget.cromcommand.inject;
+package hu.nugget.croncommand.inject;
 
 import dagger.BindsInstance;
 import dagger.Component;
-import hu.nugget.cromcommand.CronCommand;
-import hu.nugget.cromcommand.PluginLoader;
+import hu.nugget.croncommand.CronCommand;
+import hu.nugget.croncommand.PluginLoader;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

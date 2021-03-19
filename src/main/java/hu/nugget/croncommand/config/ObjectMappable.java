@@ -1,4 +1,4 @@
-package hu.nugget.cromcommand.config;
+package hu.nugget.croncommand.config;
 
 import com.electronwill.nightconfig.core.Config;
 import com.electronwill.nightconfig.core.conversion.ObjectConverter;

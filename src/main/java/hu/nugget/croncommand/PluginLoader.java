@@ -1,7 +1,7 @@
-package hu.nugget.cromcommand;
+package hu.nugget.croncommand;
 
-import hu.nugget.cromcommand.config.Configuration;
-import hu.nugget.cromcommand.util.Common;
+import hu.nugget.croncommand.config.Configuration;
+import hu.nugget.croncommand.util.Common;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
