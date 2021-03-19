@@ -1,6 +1,5 @@
 package hu.nugget.croncommand.util;
 
-import com.electronwill.nightconfig.core.Config;
 import com.electronwill.nightconfig.core.file.FileConfig;
 import hu.nugget.croncommand.CronCommand;
 import org.jetbrains.annotations.NotNull;
@@ -23,13 +22,15 @@ public final class Common {
         }
 
         try (final InputStream stream = CronCommand.class.getResourceAsStream("/" + name)) {
-            Files.copy(stream, dest);
+            if (Files.notExists(dest)) {
+                Files.copy(stream, dest);
+            }
         }
 
         return dest;
     }
 
-    public static @NotNull Config loadConfig(final @NotNull Path file) {
+    public static @NotNull FileConfig loadConfig(final @NotNull Path file) {
         final FileConfig config = FileConfig.of(file);
         config.load();
 

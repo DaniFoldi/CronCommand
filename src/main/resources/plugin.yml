@@ -1,6 +1,6 @@
 name: CronCommand
 version: ${version}
-main: hu.nugget.croncommand
+main: hu.nugget.croncommand.CronCommand
 authors:
   - DaniFoldi
   - HgeX
