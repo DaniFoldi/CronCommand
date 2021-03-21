@@ -31,4 +31,9 @@ public class CronTask {
     public List<String> getCommands() {
         return Collections.unmodifiableList(commands);
     }
+
+    @Override
+    public String toString() {
+        return "CronTask{" + this.lastRun + ", " + this.cronValue + "," + this.commands + "}";
+    }
 }

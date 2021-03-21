@@ -5,4 +5,4 @@ schedule:
     - say test
     - give @a diamond
 
-lastrun:
+lastrun: {}

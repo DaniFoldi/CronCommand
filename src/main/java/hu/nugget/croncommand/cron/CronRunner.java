@@ -11,6 +11,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,10 +21,10 @@ public class CronRunner {
 
     private BukkitTask timer = null;
 
-    private static CronParser parser;
+    private static final CronParser PARSER;
 
     static {
-        parser = new CronParser(CronDefinitionBuilder.instanceDefinitionFor(CronType.UNIX));
+        PARSER = new CronParser(CronDefinitionBuilder.instanceDefinitionFor(CronType.UNIX));
     }
 
     public CronRunner(List<CronTask> tasks) {
@@ -34,7 +35,7 @@ public class CronRunner {
         timer = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
 
             for (CronTask task: tasks) {
-                Cron cronTask = parser.parse(task.getCronValue());
+                Cron cronTask = PARSER.parse(task.getCronValue());
                 ExecutionTime time = ExecutionTime.forCron(cronTask);
                 ZonedDateTime zonedTime = task.getLastRun().atZone(ZoneId.systemDefault());
                 Optional<ZonedDateTime> lastTime = time.lastExecution(ZonedDateTime.now());
@@ -53,5 +54,9 @@ public class CronRunner {
         if (timer != null) {
             timer.cancel();
         }
+    }
+
+    public List<CronTask> getTasks() {
+        return Collections.unmodifiableList(this.tasks);
     }
 }
