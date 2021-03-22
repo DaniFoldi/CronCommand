@@ -41,6 +41,7 @@ public class CronRunner {
                 Optional<ZonedDateTime> lastTime = time.lastExecution(ZonedDateTime.now());
 
                 if (lastTime.isPresent() && lastTime.get().isAfter(zonedTime)) {
+                    plugin.getLogger().info("Executing commands for cron " + task.getCronValue());
                     for (String command: task.getCommands()) {
                         Bukkit.getScheduler().runTask(plugin, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));
                     }

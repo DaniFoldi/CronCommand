@@ -7,3 +7,11 @@ authors:
 website: nugget.hu
 description: Run commands at specified cron times
 api-version: 1.13
+
+commands:
+  croncommand:
+    description: Used to reload the plugin
+
+permissions:
+  croncommand.reload:
+    description: Permission to reload the plugin
