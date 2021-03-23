@@ -4,11 +4,11 @@ import com.cronutils.model.Cron;
 import com.cronutils.model.CronType;
 import com.cronutils.model.definition.CronDefinitionBuilder;
 import com.cronutils.model.time.ExecutionTime;
-import com.cronutils.parser.CronParser;
 import hu.nugget.croncommand.CronCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Collections;
@@ -21,12 +21,6 @@ public class CronRunner {
 
     private BukkitTask timer = null;
 
-    private static final CronParser PARSER;
-
-    static {
-        PARSER = new CronParser(CronDefinitionBuilder.instanceDefinitionFor(CronType.UNIX));
-    }
-
     public CronRunner(List<CronTask> tasks) {
         this.tasks = tasks;
     }
@@ -35,17 +29,14 @@ public class CronRunner {
         timer = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
 
             for (CronTask task: tasks) {
-                Cron cronTask = PARSER.parse(task.getCronValue());
-                ExecutionTime time = ExecutionTime.forCron(cronTask);
-                ZonedDateTime zonedTime = task.getLastRun().atZone(ZoneId.systemDefault());
-                Optional<ZonedDateTime> lastTime = time.lastExecution(ZonedDateTime.now());
+                Optional<Instant> lastTime = CronParser.lastExecutionTime(task.getCronValue());
 
-                if (lastTime.isPresent() && lastTime.get().isAfter(zonedTime)) {
+                if (lastTime.isPresent() && lastTime.get().isAfter(Instant.now())) {
                     plugin.getLogger().info("Executing commands for cron " + task.getCronValue());
                     for (String command: task.getCommands()) {
                         Bukkit.getScheduler().runTask(plugin, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));
                     }
-                    task.setLastRun(lastTime.get().toInstant());
+                    task.setLastRun(lastTime.get());
                 }
             }
         }, 0, 20);

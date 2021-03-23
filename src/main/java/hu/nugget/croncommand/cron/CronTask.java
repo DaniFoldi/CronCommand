@@ -3,6 +3,7 @@ package hu.nugget.croncommand.cron;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class CronTask {
 
@@ -10,8 +11,8 @@ public class CronTask {
     private final String cronValue;
     private final List<String> commands;
 
-    public CronTask(Instant lastRun, String cronValue, List<String> commands) {
-        this.lastRun = lastRun;
+    public CronTask(Optional<Instant> lastRun, String cronValue, List<String> commands) {
+        this.lastRun = lastRun.orElse(CronParser.lastExecutionTime(cronValue).orElse(Instant.MIN));
         this.cronValue = cronValue;
         this.commands = commands;
     }

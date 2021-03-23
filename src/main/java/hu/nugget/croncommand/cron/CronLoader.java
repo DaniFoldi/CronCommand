@@ -13,8 +13,6 @@ import java.util.Optional;
 
 public final class CronLoader {
 
-    private static final String DEFAULT_INSTANT_STRING = "1970-01-01T00:00:00.000000Z";
-
     private CronLoader() {
         throw new UnsupportedOperationException("Wtf are ya doing?");
     }
@@ -28,10 +26,11 @@ public final class CronLoader {
         if (schedule != null) {
             for (String key : schedule.getKeys(false)) {
                 List<String> commands = schedule.getStringList(key);
-                Instant last = Instant.parse(lastRun == null
-                        ? DEFAULT_INSTANT_STRING
-                        : Optional.ofNullable(lastRun.getString(String.valueOf(Objects.hash(key, commands))))
-                        .orElse(DEFAULT_INSTANT_STRING));
+                String lastString = lastRun == null ? null : lastRun.getString(String.valueOf(Objects.hash(key, commands)));
+                Optional<Instant> last = lastString == null
+                        ? Optional.empty()
+                        : Optional.ofNullable(Instant.parse(lastString));
+
                 tasks.add(new CronTask(last, key, commands));
             }
         }
