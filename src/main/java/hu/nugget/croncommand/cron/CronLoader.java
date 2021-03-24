@@ -1,17 +1,17 @@
 package hu.nugget.croncommand.cron;
 
+import hu.nugget.croncommand.CronCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -20,13 +20,15 @@ import java.util.Optional;
 public final class CronLoader {
 
     private CronLoader() {
-        throw new UnsupportedOperationException("Wtf are ya doing?");
+        throw new UnsupportedOperationException();
     }
 
-    public static List<CronTask> load(FileConfiguration config, Map<String, String> lastRun) {
-        List<CronTask> tasks = new ArrayList<>();
+    public static List<CronTask> load(CronCommand plugin) {
+        plugin.reloadConfig();
+        ConfigurationSection schedule = plugin.getConfig().getConfigurationSection("schedule");
+        Map<String, String> lastRun = getLastRun(plugin);
 
-        ConfigurationSection schedule = config.getConfigurationSection("schedule");
+        List<CronTask> tasks = new ArrayList<>();
 
         if (schedule != null) {
             for (String key : schedule.getKeys(false)) {
@@ -42,6 +44,16 @@ public final class CronLoader {
         }
 
         return tasks;
+    }
+
+    private static Map<String, String> getLastRun(CronCommand plugin) {
+        Map<String, String> map = new HashMap<>();
+        try (BufferedReader reader = Files.newBufferedReader(plugin.getDataFolder().toPath().resolve("lastrun.yml"))) {
+            reader.lines().filter(e -> !e.trim().isEmpty()).map(e -> e.split("IlikeTRAINS")).forEach(e -> map.put(e[0], e[1]));
+            return map;
+        } catch (IOException e) {
+            return map;
+        }
     }
 
     public static void save(Path file, List<CronTask> tasks) throws IOException {

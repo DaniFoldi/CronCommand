@@ -4,10 +4,9 @@ import dagger.BindsInstance;
 import dagger.Component;
 import hu.nugget.croncommand.CronCommand;
 import hu.nugget.croncommand.PluginLoader;
-import org.bukkit.configuration.file.FileConfiguration;
+import hu.nugget.croncommand.cron.CronRunner;
 
 import javax.inject.Singleton;
-import java.util.Map;
 
 @Singleton
 @Component
@@ -22,10 +21,7 @@ public interface PluginComponent {
         Builder bindPlugin(final CronCommand plugin);
 
         @BindsInstance
-        Builder bindConfig(final FileConfiguration config);
-
-        @BindsInstance
-        Builder bindLastrun(final Map<String, String> lastRun);
+        Builder bindCronRunner(final CronRunner cronRunner);
 
         PluginComponent build();
     }

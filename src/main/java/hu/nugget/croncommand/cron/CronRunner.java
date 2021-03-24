@@ -11,23 +11,26 @@ import java.util.Optional;
 
 public class CronRunner {
 
-    private final List<CronTask> tasks;
+    private List<CronTask> tasks;
 
     private BukkitTask timer = null;
 
-    public CronRunner(List<CronTask> tasks) {
+    public CronRunner() {
+    }
+
+    public void setTasks(List<CronTask> tasks) {
         this.tasks = tasks;
     }
 
     public void start(CronCommand plugin) {
         timer = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
 
-            for (CronTask task: tasks) {
+            for (CronTask task : tasks) {
                 Optional<Instant> lastTime = CronParser.lastExecutionTime(task.getCronValue());
 
-                if (lastTime.isPresent() && lastTime.get().isAfter(task.getLastRun())) {
+                if (lastTime.isEmpty() || lastTime.get().isAfter(task.getLastRun())) {
                     plugin.getLogger().info("Executing commands for cron " + task.getCronValue());
-                    for (String command: task.getCommands()) {
+                    for (String command : task.getCommands()) {
                         Bukkit.getScheduler().runTask(plugin, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));
                     }
                     task.setLastRun(lastTime.get());
@@ -37,6 +40,7 @@ public class CronRunner {
     }
 
     public void cancel() {
+        setTasks(Collections.emptyList());
         if (timer != null) {
             timer.cancel();
         }
