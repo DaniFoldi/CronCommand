@@ -25,4 +25,8 @@ public class CronParser {
 
         return Optional.of(dateTime.get().toInstant());
     }
+
+    private CronParser() {
+        throw new UnsupportedOperationException();
+    }
 }

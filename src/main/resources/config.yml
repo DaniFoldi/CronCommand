@@ -9,5 +9,3 @@ messages:
   noPermission: '&cNincs jogod ehhez.'
   usage: '&bHasználat: /croncommand reload'
   reloaded: '&bPlugin sikeresen újratöltve'
-
-lastrun: {}

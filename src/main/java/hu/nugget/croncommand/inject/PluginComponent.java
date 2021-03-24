@@ -6,9 +6,8 @@ import hu.nugget.croncommand.CronCommand;
 import hu.nugget.croncommand.PluginLoader;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
-import java.nio.file.Path;
+import java.util.Map;
 
 @Singleton
 @Component
@@ -24,6 +23,9 @@ public interface PluginComponent {
 
         @BindsInstance
         Builder bindConfig(final FileConfiguration config);
+
+        @BindsInstance
+        Builder bindLastrun(final Map<String, String> lastRun);
 
         PluginComponent build();
     }

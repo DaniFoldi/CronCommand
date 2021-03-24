@@ -1,16 +1,10 @@
 package hu.nugget.croncommand.cron;
 
-import com.cronutils.model.Cron;
-import com.cronutils.model.CronType;
-import com.cronutils.model.definition.CronDefinitionBuilder;
-import com.cronutils.model.time.ExecutionTime;
 import hu.nugget.croncommand.CronCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +25,7 @@ public class CronRunner {
             for (CronTask task: tasks) {
                 Optional<Instant> lastTime = CronParser.lastExecutionTime(task.getCronValue());
 
-                if (lastTime.isPresent() && lastTime.get().isAfter(Instant.now())) {
+                if (lastTime.isPresent() && lastTime.get().isAfter(task.getLastRun())) {
                     plugin.getLogger().info("Executing commands for cron " + task.getCronValue());
                     for (String command: task.getCommands()) {
                         Bukkit.getScheduler().runTask(plugin, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));

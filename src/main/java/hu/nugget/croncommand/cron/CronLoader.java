@@ -3,11 +3,15 @@ package hu.nugget.croncommand.cron;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -17,16 +21,15 @@ public final class CronLoader {
         throw new UnsupportedOperationException("Wtf are ya doing?");
     }
 
-    public static List<CronTask> load(FileConfiguration config) {
+    public static List<CronTask> load(FileConfiguration config, Map<String, String> lastRun) {
         List<CronTask> tasks = new ArrayList<>();
 
         ConfigurationSection schedule = config.getConfigurationSection("schedule");
-        ConfigurationSection lastRun = config.getConfigurationSection("lastrun");
 
         if (schedule != null) {
             for (String key : schedule.getKeys(false)) {
                 List<String> commands = schedule.getStringList(key);
-                String lastString = lastRun == null ? null : lastRun.getString(String.valueOf(Objects.hash(key, commands)));
+                String lastString = lastRun.get(String.valueOf(Objects.hash(key, commands)));
                 Optional<Instant> last = lastString == null
                         ? Optional.empty()
                         : Optional.ofNullable(Instant.parse(lastString));
@@ -38,12 +41,12 @@ public final class CronLoader {
         return tasks;
     }
 
-    public static void save(Path file, FileConfiguration config, List<CronTask> tasks) throws IOException {
-        for (CronTask task : tasks) {
-            String key = "lastrun." + Objects.hash(task.getCronValue(), task.getCommands());
-            config.set(key, task.getLastRun().toString());
+    public static void save(Path file, List<CronTask> tasks) throws IOException {
+        try (BufferedWriter writer = Files.newBufferedWriter(file)) {
+            for (CronTask task : tasks) {
+                writer.write(Objects.hash(task.getCronValue(), task.getCommands()) + "IlikeTRAINS" + task.getLastRun().toString());
+                writer.newLine();
+            }
         }
-
-        config.save(file.toFile());
     }
 }
