@@ -1,8 +1,10 @@
 package hu.nugget.croncommand.cron;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -35,6 +37,7 @@ public final class CronLoader {
                         : Optional.ofNullable(Instant.parse(lastString));
 
                 tasks.add(new CronTask(last, key, commands));
+                Bukkit.getLogger().info("- Loading task " + tasks.get(tasks.size() - 1));
             }
         }
 
