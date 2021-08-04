@@ -1,4 +1,4 @@
-package hu.nugget.croncommand;
+package com.danifoldi.croncommand;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;

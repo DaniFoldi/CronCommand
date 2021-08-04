@@ -1,4 +1,4 @@
-package hu.nugget.croncommand.cron;
+package com.danifoldi.croncommand.cron;
 
 import java.time.Instant;
 import java.util.Collections;

@@ -3,18 +3,19 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
-group 'hu.nugget'
-version '1.1.1'
+group 'com.danifoldi'
+version '1.2.0'
 
-sourceCompatibility = 1.11
+sourceCompatibility = JavaVersion.VERSION_16
 
 repositories {
     mavenCentral()
+    google()
     maven { url 'https://papermc.io/repo/repository/maven-public/' }
 }
 
 dependencies {
-    compileOnly ('com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT') {
+    compileOnly ('io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT') {
         exclude module: 'guava'
         exclude module: 'jsr305'
     }
@@ -31,15 +32,16 @@ dependencies {
 processResources {
     from('src/main/resources') {
         expand(version: project.version)
+        duplicatesStrategy(DuplicatesStrategy.INCLUDE)
     }
 }
 
 shadowJar {
     minimize()
 
-    relocate 'javax.inject', 'hu.nugget.croncommand.reloc.inject'
-    relocate 'dagger', 'hu.nugget.croncommand.reloc.dagger'
-    relocate 'com.cronutils', 'hu.nugget.croncommand.reloc.cronutils'
+    relocate 'javax.inject', 'com.danifoldi.croncommand.libs.inject'
+    relocate 'dagger', 'com.danifoldi.croncommand.libs.dagger'
+    relocate 'com.cronutils', 'com.danifoldi.croncommand.libs.cronutils'
 
     getArchiveFileName().set("${project.name}-${project.version}.jar")
 }

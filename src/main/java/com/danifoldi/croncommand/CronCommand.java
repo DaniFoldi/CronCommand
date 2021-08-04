@@ -1,8 +1,8 @@
-package hu.nugget.croncommand;
+package com.danifoldi.croncommand;
 
-import hu.nugget.croncommand.cron.CronRunner;
-import hu.nugget.croncommand.inject.DaggerPluginComponent;
-import hu.nugget.croncommand.inject.PluginComponent;
+import com.danifoldi.croncommand.cron.CronRunner;
+import com.danifoldi.croncommand.inject.DaggerPluginComponent;
+import com.danifoldi.croncommand.inject.PluginComponent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CronCommand extends JavaPlugin {

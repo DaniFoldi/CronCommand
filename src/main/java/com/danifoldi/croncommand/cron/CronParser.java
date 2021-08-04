@@ -1,4 +1,4 @@
-package hu.nugget.croncommand.cron;
+package com.danifoldi.croncommand.cron;
 
 import com.cronutils.model.Cron;
 import com.cronutils.model.CronType;

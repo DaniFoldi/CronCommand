@@ -1,7 +1,7 @@
-package hu.nugget.croncommand;
+package com.danifoldi.croncommand;
 
-import hu.nugget.croncommand.cron.CronLoader;
-import hu.nugget.croncommand.cron.CronRunner;
+import com.danifoldi.croncommand.cron.CronLoader;
+import com.danifoldi.croncommand.cron.CronRunner;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public final class PluginLoader {
     private final CronCommand plugin;
-    private CronRunner cronRunner;
+    private final CronRunner cronRunner;
     private ReloadCommand reloadCommand;
 
     @Inject
@@ -34,7 +34,7 @@ public final class PluginLoader {
     protected void unload() {
         this.cronRunner.cancel();
         try {
-            Path lastRunFile = this.plugin.getDataFolder().toPath().resolve("lastrun.yml");
+            Path lastRunFile = this.plugin.getDataFolder().toPath().resolve("lastrun.txt");
             if (!Files.exists(lastRunFile)) {
                 Files.createFile(lastRunFile);
             }

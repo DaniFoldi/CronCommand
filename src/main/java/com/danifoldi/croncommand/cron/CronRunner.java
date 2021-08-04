@@ -1,6 +1,6 @@
-package hu.nugget.croncommand.cron;
+package com.danifoldi.croncommand.cron;
 
-import hu.nugget.croncommand.CronCommand;
+import com.danifoldi.croncommand.CronCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
 

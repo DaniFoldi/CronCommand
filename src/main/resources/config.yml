@@ -1,11 +1,12 @@
 schedule:
+  "0,20,40 * * * *":
+    - say Thank you for using CronCommand. You can add your own cron commands in the plugin's config.yml.
+  "0 8 * * *":
+    - say Good morning!
   "30 * * * *":
-    - lottery broadcast
-  "* * * * *":
-    - say test
-    - give @a diamond
+    - say I recommend you stand up and walk around for a minute.
 
 messages:
-  noPermission: '&cNincs jogod ehhez.'
-  usage: '&bHasználat: /croncommand reload'
-  reloaded: '&bPlugin sikeresen újratöltve'
+  noPermission: '&cYou do not have permission to do that.'
+  usage: '&bUsage: &c/croncommand reload&b.'
+  reloaded: '&bPlugin reloaded successfully.'

@@ -1,6 +1,6 @@
-package hu.nugget.croncommand.cron;
+package com.danifoldi.croncommand.cron;
 
-import hu.nugget.croncommand.CronCommand;
+import com.danifoldi.croncommand.CronCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -48,7 +48,7 @@ public final class CronLoader {
 
     private static Map<String, String> getLastRun(CronCommand plugin) {
         Map<String, String> map = new HashMap<>();
-        try (BufferedReader reader = Files.newBufferedReader(plugin.getDataFolder().toPath().resolve("lastrun.yml"))) {
+        try (BufferedReader reader = Files.newBufferedReader(plugin.getDataFolder().toPath().resolve("lastrun.txt"))) {
             reader.lines().filter(e -> !e.trim().isEmpty()).map(e -> e.split("IlikeTRAINS")).forEach(e -> map.put(e[0], e[1]));
             return map;
         } catch (IOException e) {

@@ -1,10 +1,10 @@
-package hu.nugget.croncommand.inject;
+package com.danifoldi.croncommand.inject;
 
+import com.danifoldi.croncommand.CronCommand;
+import com.danifoldi.croncommand.cron.CronRunner;
+import com.danifoldi.croncommand.PluginLoader;
 import dagger.BindsInstance;
 import dagger.Component;
-import hu.nugget.croncommand.CronCommand;
-import hu.nugget.croncommand.PluginLoader;
-import hu.nugget.croncommand.cron.CronRunner;
 
 import javax.inject.Singleton;
 
