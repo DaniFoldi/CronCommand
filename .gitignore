@@ -3,5 +3,7 @@
 build/
 gradle/
 out/
+
 *.DS_Store
 src/main/generated
+libs/*.jar
