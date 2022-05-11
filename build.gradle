@@ -15,12 +15,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly ('io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT') {
+    compileOnly ('io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT') {
         exclude module: 'guava'
         exclude module: 'jsr305'
     }
 
-    compileOnly 'org.jetbrains:annotations:22.0.0'
+    compileOnly 'org.jetbrains:annotations:23.0.0'
     implementation ('com.cronutils:cron-utils:9.1.5') {
         exclude module: 'slf4j-api'
     }
