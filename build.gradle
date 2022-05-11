@@ -20,7 +20,7 @@ dependencies {
         exclude module: 'jsr305'
     }
 
-    compileOnly 'org.jetbrains:annotations:22.0.0'
+    compileOnly 'org.jetbrains:annotations:23.0.0'
     implementation ('com.cronutils:cron-utils:9.1.5') {
         exclude module: 'slf4j-api'
     }
