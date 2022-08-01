@@ -21,7 +21,7 @@ dependencies {
     }
 
     compileOnly 'org.jetbrains:annotations:23.0.0'
-    implementation ('com.cronutils:cron-utils:9.1.6') {
+    implementation ('com.cronutils:cron-utils:9.2.0') {
         exclude module: 'slf4j-api'
     }
     implementation 'javax.inject:javax.inject:1'
