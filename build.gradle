@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly ('io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT') {
+    compileOnly ('io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT') {
         exclude module: 'guava'
         exclude module: 'jsr305'
     }
